@@ -15,6 +15,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-key-for-development-o
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -75,15 +76,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': "NORMAL_DB_HOST",
-        'PORT': 25060,
-        'NAME': "NORMAL_DB_NAME",
-        'USER': "NORMAL_DB_USER",
-        'PASSWORD': "NORMAL_DB_PASSWORD",
+        'NAME': os.environ.get('NORMAL_DB_NAME', 'community_platform'),
+        'USER': os.environ.get('NORMAL_DB_USER', 'postgres'),
+        'PASSWORD': os.environ.get('NORMAL_DB_PASSWORD', 'postgres'),
+        'HOST': os.environ.get('NORMAL_DB_HOST', 'postgres'),  # Use localhost or 127.0.0.1 instead of a hostname
+        'PORT': os.environ.get('DB_PORT', 25060),
     },
 
 }
-
 
 
 
