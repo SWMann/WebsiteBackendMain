@@ -151,12 +151,25 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
-
 # CORS settings
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
 ]
+
+# Allow credentials to be included in CORS requests
+CORS_ALLOW_CREDENTIALS = True
+
+# Add CORS headers to non-standard responses
+CORS_ALLOW_ALL_ORIGINS = False  # Set to True only during development if needed
+
+# Use X-Forwarded-Host and X-Forwarded-Port for URL generation
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
+
+# Handle the path prefix in redirects and URL generation
+FORCE_SCRIPT_NAME = '/websitebackendmain'
+
 
 # Discord OAuth settings
 DISCORD_CLIENT_ID = os.environ.get('DISCORD_CLIENT_ID', '')
