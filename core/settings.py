@@ -3,12 +3,7 @@ import sys
 from pathlib import Path
 from datetime import timedelta
 
-# SSH Tunnel import - handled with try/except to avoid issues if not installed
-try:
-    import sshtunnel
-    SSHTUNNEL_AVAILABLE = True
-except ImportError:
-    SSHTUNNEL_AVAILABLE = False
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -76,36 +71,17 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-from sshtunnel import SSHTunnelForwarder
-
-# Connect to a server using the ssh keys. See the sshtunnel documentation for using password authentication
-ssh_tunnel = SSHTunnelForwarder(
-    "185-227-109-180.cloud-xip.com",
-    ssh_password="MinecraftTavistock14!",
-    ssh_username="root",
-    remote_bind_address=('localhost', 5432),
-)
-ssh_tunnel.start()
-
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'HOST': "NORMAL_DB_HOST",
-        'PORT': 222,
+        'PORT': 25060,
         'NAME': "NORMAL_DB_NAME",
         'USER': "NORMAL_DB_USER",
         'PASSWORD': "NORMAL_DB_PASSWORD",
     },
-    'shhtunnel_db': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'localhost',
-        'PORT': ssh_tunnel.local_bind_port,
-        'NAME': "template0",
-        'USER': "root",
-        'PASSWORD': "MinecraftTavistock14!",
 
-    },
 }
 
 
